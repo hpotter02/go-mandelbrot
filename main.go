@@ -47,7 +47,6 @@ func main() {
 
 func getImage(size image.Rectangle, frame cRecantlge) image.Image {
 	img := image.NewNRGBA(size)
-	//span := frame.Max - frame.Min
 	xlen := float64(size.Max.X - size.Min.X)
 	ylen := float64(size.Max.Y - size.Min.Y)
 	wg := sync.WaitGroup{}
@@ -56,7 +55,6 @@ func getImage(size image.Rectangle, frame cRecantlge) image.Image {
 			wg.Add(1)
 			go func(r float64, i float64) {
 				c := complex(real(frame.Min)+(real(frame.Max)-real(frame.Min))*r/xlen, imag(frame.Min)+(imag(frame.Max)-imag(frame.Min))*i/ylen)
-				//fmt.Println(c)
 				img.Set(int(r), int(i), getPointRGB(c))
 				wg.Done()
 			}(float64(i), float64(ii))
